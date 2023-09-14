@@ -1,81 +1,77 @@
 import pyglet
 
+
 class Arduboy:
-    cursor_x = 0
-    cursor_y = 0
-    textsize = 1
-    height = None
-    width = None
-    scale = None
+    cursor_x, cursor_y = 0, 0
+    text_size = 1
+    height, width, scale = [None] * 3
     sBuffer = []
 
     def __init__(self, x, y, s):
-        self.width = x
-        self.height = y
+        self.width, self.height = x, y
         self.scale = s
 
     # void blank();
     def blank(self):
-        self.clearDisplay()
-        self.drawScreen()
+        self.clear_display()
+        self.draw_screen()
 
     # void clearDisplay();
-    def clearDisplay(self):
-        for x in range(0, self.width):
-            for y in range(0, self.height):
+    def clear_display(self):
+        for _ in range(self.width):
+            for _ in range(self.height):
                 self.sBuffer.append(0)
 
     # void display();
     def display(self):
-        self.drawScreen(self.sBuffer)
+        self.draw_screen(self.sBuffer)
 
     # void drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap, int16_t w, int16_t h, uint8_t color);
-    def drawBitmap(self):
-        #TODO: implement drawBitmap
+    def draw_bitmap(self):
+        # todo: implement drawBitmap
         pass
 
     # void drawChar(int16_t x, int16_t y, unsigned char c, uint8_t color, uint8_t bg, uint8_t size);
     # Font Minecraftia: http://www.dafont.com/es/minecraftia.font
-    def drawChar(self, x, y, c, size):
+    def draw_char(self, x, y, c, size):
         if len(c) == 1:
             label = pyglet.text.Label(c,
-                              font_name='Minecraftia',
-                              font_size=size*self.scale*6,
-                              x=x*self.scale, y=(63-y)*self.scale)
+                                      font_name='Minecraftia',
+                                      font_size=size * self.scale * 6,
+                                      x=x * self.scale, y=(63 - y) * self.scale)
             label.draw()
 
     # void drawPixel(int x, int y, uint8_t color);
-    def drawPixel(self, x, y):
+    def draw_pixel(self, x, y):
         if 0 <= x < self.width and 0 <= y < self.height:
-            self.sBuffer[x*self.height+y] = 1
+            self.sBuffer[x * self.height + y] = 1
 
     # void drawScreen(const unsigned char *image);
     # void drawScreen(unsigned char image[]);
-    def drawScreen(self, image):
-        for x in range(0, self.width):
-            for y in range(0, self.height):
-                if image[x*self.height+y] == 1:
-                    pyglet.graphics.draw(4, pyglet.gl.GL_QUADS, ('v2i', [x*self.scale,
-                                                                         (63-y)*self.scale,
-                                                                         x*self.scale+self.scale,
-                                                                         (63-y)*self.scale,
-                                                                         x*self.scale+self.scale,
-                                                                         (63-y)*self.scale+self.scale,
-                                                                         x*self.scale,
-                                                                         (63-y)*self.scale+self.scale]))
-    # void setCursor(int16_t x, int16_t y);
-    def setCursor(self, x, y):
-        self.cursor_x = x
-        self.cursor_y = y
+    def draw_screen(self, image):
+        for x in range(self.width):
+            for y in range(self.height):
+                if image[x * self.height + y] == 1:
+                    pyglet.graphics.draw(4, pyglet.gl.GL_QUADS, ('v2i', [x * self.scale,
+                                                                         (63 - y) * self.scale,
+                                                                         x * self.scale + self.scale,
+                                                                         (63 - y) * self.scale,
+                                                                         x * self.scale + self.scale,
+                                                                         (63 - y) * self.scale + self.scale,
+                                                                         x * self.scale,
+                                                                         (63 - y) * self.scale + self.scale]))
 
+    # void setCursor(int16_t x, int16_t y);
+
+    def set_cursor(self, x, y):
+        self.cursor_x, self.cursor_y = x, y
 
     # void setTextSize(uint8_t s);
-    def setTextSize(self, size):
-        self.textsize = size*self.scale*6
-        pass
+    def set_text_size(self, size):
+        self.text_size = size * self.scale * 6
 
-    #TODO: original fuctions to be implemented
-    #Test
+    # TODO: original functions to be implemented
+    # Test
     # void start();
     # void idle();
     #
