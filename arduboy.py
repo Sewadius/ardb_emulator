@@ -52,14 +52,17 @@ class Arduboy:
         for x in range(self.width):
             for y in range(self.height):
                 if image[x * self.height + y] == 1:
-                    pyglet.graphics.draw(4, pyglet.gl.GL_QUADS, ('v2i', [x * self.scale,
-                                                                         (63 - y) * self.scale,
-                                                                         x * self.scale + self.scale,
-                                                                         (63 - y) * self.scale,
-                                                                         x * self.scale + self.scale,
-                                                                         (63 - y) * self.scale + self.scale,
-                                                                         x * self.scale,
-                                                                         (63 - y) * self.scale + self.scale]))
+                    pyglet.graphics.draw(4, pyglet.gl.GL_QUADS)
+
+    # ('v2i', [x * self.scale,
+    #       (63 - y) * self.scale,
+    #                                                                          x * self.scale + self.scale,
+    #                                                                          (63 - y) * self.scale,
+    #                                                                          x * self.scale + self.scale,
+    #                                                                          (63 - y) * self.scale + self.scale,
+    #                                                                          x * self.scale,
+    #                                                                          (63 - y) * self.scale + self.scale])
+
 
     # void setCursor(int16_t x, int16_t y);
 

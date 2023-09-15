@@ -2,9 +2,9 @@ import pyglet
 from arduboy import Arduboy
 
 # Arduboy constructor. (x size, y size, scale)
-arduboy = Arduboy(128, 64, 5)
+ad = Arduboy(128, 64, 5)
 # Create window to display Arduboy emulation
-window = pyglet.window.Window(arduboy.width*arduboy.scale, arduboy.height*arduboy.scale, "Arduboy Emulator")
+window = pyglet.window.Window(ad.width * ad.scale, ad.height * ad.scale, "Arduboy Emulator")
 
 
 @window.event
@@ -14,10 +14,13 @@ def on_draw():
 
 
 def run_code():
-    arduboy.clear_display()
-    arduboy.draw_pixel(5, 15)
-    arduboy.draw_char(0, 20, 'A', 1)
-    arduboy.display()
+    ad.clear_display()
+    ad.draw_pixel(5, 15)
+    ad.draw_char(0, 20, 'A', 1)
+    ad.draw_char(10, 20, 'B', 1)
+    ad.draw_char(20, 20, 'C', 1)
+    # ad.display()
 
 
-pyglet.app.run()
+if __name__ == '__main__':
+    pyglet.app.run()
